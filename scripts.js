@@ -163,8 +163,6 @@ addBookToLibrary(newBook3);
 // Reference the table object
 const tableBooksTable = document.getElementById('books-table');
 
-
-
 // append the <tbody> tag to the table
 tableBooksTable.appendChild(populateBooks());
 
