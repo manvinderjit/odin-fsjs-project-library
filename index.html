@@ -9,33 +9,40 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h2>Project: Library</h2>
-            <h3>This project primarily demonstrates the usage of objects and object constructors!</h3>
-        </div>
+        
         <div class="content">
             <div class="content-controls">
+                <h2>Project: Library</h2>
+                <h3>This project primarily demonstrates the usage of objects and object constructors!</h3>
                 <h3>Add a New Book using the following button!</h3>
                 <button id="button-toggle-form" type="button">Add New Book</button>
+                <div>
 
-                <form id="form-add-new-book">
-
-                    <label for="book-name">Book Name</label>
-                    <input id="book-name" type="text">
-
-                    <label for="book-author">Author</label>
-                    <input id="book-author" type="text">
-
-                    <label for="book-pages">Pages</label>
-                    <input id="book-pages" type="text">
-                    
-                    <br><br>
-                    
-                    <button class="input-submit-form" type="submit">Add Book</button>
-                </form>
+                    <form id="form-add-new-book">
+                        <div id="div-form-add-new-book">
+                            <div>
+                                <label for="book-name">Book Name</label>
+                                <input id="book-name" type="text">
+                            </div>
+                            <div>
+                                <label for="book-author">Author</label>
+                                <input id="book-author" type="text">
+                            </div>
+                            <div>
+                                <label for="book-pages">Pages</label>
+                                <input id="book-pages" type="text">
+                            </div>
+                            <div></div>
+                            <div >
+                                <button class="input-submit-form" type="submit">Add Book</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="content-table">
                 <table id="books-table">
+                    <caption>The table below lists the books</caption>
                     <thead>
                     <tr>
                         <th>S. No.</th>
