@@ -8,7 +8,49 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <script type="text/javascript" href="scripts.js"></script>
+    <div class="container">
+        <div class="header">
+            <h2>Project: Library</h2>
+            <h3>This project primarily demonstrates the usage of objects and object constructors!</h3>
+        </div>
+        <div class="content">
+            <div class="content-controls">
+                <h3>Add a New Book using the following button!</h3>
+                <button id="button-toggle-form" type="button">Add New Book</button>
+
+                <form id="form-add-new-book">
+
+                    <label for="book-name">Book Name</label>
+                    <input id="book-name" type="text">
+
+                    <label for="book-author">Author</label>
+                    <input id="book-author" type="text">
+
+                    <label for="book-pages">Pages</label>
+                    <input id="book-pages" type="text">
+                    
+                    <br><br>
+                    
+                    <button class="input-submit-form" type="submit">Add Book</button>
+                </form>
+            </div>
+            <div class="content-table">
+                <table id="books-table">
+                    <thead>
+                    <tr>
+                        <th>S. No.</th>
+                        <th>Book Title</th>
+                        <th>Author</th>
+                        <th>Pages</th>
+                        <th>Read</th>
+                        <th>Change Read Status</th>
+                        <th>Remove Book</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>    
+    <script type="text/javascript" src="scripts.js"></script>
 </body>
 </html>
