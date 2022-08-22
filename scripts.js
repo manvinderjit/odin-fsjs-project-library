@@ -1,7 +1,6 @@
-class Library { 
-  
-  constructor(title, author, pages, read) {
-    let myLibrary = [];
+class Book {
+
+  constructor (title = 'Not Specified', author = 'Not Specified', pages = 0, read = false) {    
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -9,27 +8,73 @@ class Library {
   }
 }
 
+class Library { 
+  
+  constructor() {
+    this.myLibrary = [];    
+  }
 
+  addBookToLibrary(newBook) {  
+    this.myLibrary.push(newBook);
+  }
 
-// function Book(title, author, pages, read) {    
-//     this.title = title;
-//     this.author = author;
-//     this.pages = pages;
-//     this.read = read;
-    
-// }
+  // Toggle book read status
+  toggleBookReadStatus(_bookId) {
+    this.myLibrary[_bookId-1].read = !this.myLibrary[_bookId-1].read;  
+  }
 
-function addBookToLibrary(newBook) {  
-  myLibrary.push(newBook);
+  // Remove book from the array
+  removeBook(_bookId) {
+    return this.myLibrary.splice(_bookId-1, 1);  
+  }
+ 
 }
 
+// Add sample books to the table
+const newBook1 = new Book("An Awesome Book", "Awesome Writer", "300", false);
+const newBook2 = new Book("Another Awesome Book", "Another Awesome Writer", "500", false);
+const newBook3 = new Book("3rd Awesome Book", "3rd Awesome Writer", "700", false);
+
+let myCreatedLibrary = new Library();
+
+myCreatedLibrary.addBookToLibrary(newBook1);
+myCreatedLibrary.addBookToLibrary(newBook2);
+myCreatedLibrary.addBookToLibrary(newBook3);
+
+const btn = document.getElementById('button-toggle-form');
+
+const form = document.getElementById('form-add-new-book');
+form.style.display = 'none';
+
+// Reference the table object
+const tableBooksTable = document.getElementById('books-table');
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  addBookFromFormData();
+  repopulateTable();
+  addButtonEventListener();
+  
+});
+
+// show/hide the form on button click
+btn.addEventListener('click', () => {
+  if (form.style.display == 'none') {
+    // this SHOWS the form
+    form.style.display = 'block';
+  } else {
+    // this HIDES the form
+    form.style.display = 'none';
+  }
+});
+
 // Add event listeners for Toogle Read and Remove Book buttons
-function addButtonEventListener (){
+const addButtonEventListener = () => {
 
   var btns = document.querySelectorAll('.button-read-toggle');
   btns.forEach(function (btn) {
     btn.addEventListener('click', function() {      
-      toggleBookReadStatus(btn.id);
+      myCreatedLibrary.toggleBookReadStatus(btn.id);
       repopulateTable();
 
       addButtonEventListener();
@@ -39,56 +84,46 @@ function addButtonEventListener (){
   var removeBtns = document.querySelectorAll('.button-remove-book');
   removeBtns.forEach(function (btn) {
     btn.addEventListener('click', function() {      
-      removeBook(btn.id);
+      myCreatedLibrary.removeBook(btn.id);
       repopulateTable();
       addButtonEventListener();
     });
   });
-  
-}
 
-// Toggle book read status
-function toggleBookReadStatus(_bookId) {
-  myLibrary[_bookId-1].read = !myLibrary[_bookId-1].read;  
-}
-
-// Remove book from the array
-function removeBook(_bookId) {
-  let newLibraryArray = myLibrary.splice(_bookId-1, 1);  
 }
 
 // Repopulate the table 
-function repopulateTable (){
+const repopulateTable = () => {
   tableBooksTable.removeChild(tableBooksTable.getElementsByTagName("tbody")[0]);
   tableBooksTable.appendChild(populateBooks());
 }
 
 // Clears the add new book form
-function clearForm (){
+const clearForm = () => {
   document.getElementById("book-name").value = "";
   document.getElementById("book-author").value = "";
   document.getElementById("book-pages").value = "";
 }
 
 // Adds a new book to the table from the form data
-function addBookFromFormData (){
+const addBookFromFormData = () => {
   const newBook = new Book(
                         document.getElementById("book-name").value,
                         document.getElementById("book-author").value,
                         document.getElementById("book-pages").value,
                         false
     );
-    addBookToLibrary(newBook);
+    myCreatedLibrary.addBookToLibrary(newBook);
     clearForm();
 }
 
 // Generate the tbody tag populated with the books for the table 
-function populateBooks (){
+const populateBooks = () => {
 
   let tableBooksTableBody = document.createElement('tbody');
   let i = 1;
 
-  myLibrary.forEach((book) => {
+  myCreatedLibrary.myLibrary.forEach((book) => {
 
     // Create a new <tr> for each book
     let newBookRow = document.createElement("tr");
@@ -137,42 +172,6 @@ function populateBooks (){
   return tableBooksTableBody;
   
 }
-
-const btn = document.getElementById('button-toggle-form');
-
-const form = document.getElementById('form-add-new-book');
-form.style.display = 'none';
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  addBookFromFormData();
-  repopulateTable();
-  addButtonEventListener();
-  
-});
-
-// show/hide the form on button click
-btn.addEventListener('click', () => {
-  if (form.style.display == 'none') {
-    // this SHOWS the form
-    form.style.display = 'block';
-  } else {
-    // this HIDES the form
-    form.style.display = 'none';
-  }
-});
-
-// Add sample books to the table
-const newBook1 = new Book("An Awesome Book", "Awesome Writer", "300", false);
-const newBook2 = new Book("Another Awesome Book", "Another Awesome Writer", "500", false);
-const newBook3 = new Book("3rd Awesome Book", "3rd Awesome Writer", "700", false);
-
-addBookToLibrary(newBook1);
-addBookToLibrary(newBook2);
-addBookToLibrary(newBook3);
-
-// Reference the table object
-const tableBooksTable = document.getElementById('books-table');
 
 // append the <tbody> tag to the table
 tableBooksTable.appendChild(populateBooks());
